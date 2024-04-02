@@ -3,14 +3,14 @@ import axios from 'axios';
 
 export default function App() {
   const [data, setData] = useState([]);
-  const [len, setLen] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
   const [counter, setCounter] = useState(1);
 
   useEffect(() => {
     const handleData = async () => {
       const response = await axios.get(`http://localhost:4000/?page=${counter}`);
       setData(response.data.data);
-      setLen(response.data.len);
+      setTotalPage(response.data.count);
     }
     handleData();
   }, [counter]);
@@ -28,13 +28,13 @@ export default function App() {
         ))}
       </div>
       <div className=' flex flex-row p-4 gap-4'>
-        <button onClick={() => setCounter(counter => (counter == 1 ? Math.ceil(len / 2) : counter - 1))} className=' px-3 py-2 flex justify-center items-center bg-slate-600 text-white rounded-md'>&lt;</button>
-        {[...Array(Math.ceil(len / 2))].map((_, i) => (
+        <button onClick={() => setCounter(counter => (counter == 1 ? Math.ceil(totalPage / 2) : counter - 1))} className=' px-3 py-2 flex justify-center items-center bg-slate-600 text-white rounded-md'>&lt;</button>
+        {[...Array(Math.ceil(totalPage / 2))].map((_, i) => (
           <div key={i}>
-            <div onClick={() => setCounter(i + 1)} className={`${counter == (i+1) ? " bg-slate-500" : ""} px-3 py-2 flex justify-center items-center hover:bg-slate-300 rounded-full`}>{i + 1}</div>
+            <div onClick={() => setCounter(i + 1)} className={`${counter == (i+1) ? " bg-slate-500 text-white" : ""} px-3 py-2 flex justify-center items-center hover:text-black hover:bg-slate-300 rounded-full`}>{i + 1}</div>
           </div>
         ))}
-        <button onClick={() => setCounter(counter => (counter >= Math.ceil(len / 2) ? 1 : counter + 1))} className=' px-3 py-2 flex justify-center items-center bg-slate-600 text-white rounded-md'>&gt;</button>
+        <button onClick={() => setCounter(counter => (counter >= Math.ceil(totalPage / 2) ? 1 : counter + 1))} className=' px-3 py-2 flex justify-center items-center bg-slate-600 text-white rounded-md'>&gt;</button>
       </div>
     </div>
   )
