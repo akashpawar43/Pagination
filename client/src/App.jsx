@@ -31,7 +31,7 @@ export default function App() {
         <button onClick={() => setCounter(counter => (counter == 1 ? Math.ceil(len / 2) : counter - 1))} className=' px-3 py-2 flex justify-center items-center bg-slate-600 text-white rounded-md'>&lt;</button>
         {[...Array(Math.ceil(len / 2))].map((_, i) => (
           <div key={i}>
-            <div onClick={() => setCounter(i + 1)} className='px-3 py-2 flex justify-center items-center hover:bg-slate-400 rounded-full'>{i + 1}</div>
+            <div onClick={() => setCounter(i + 1)} className={`${counter == (i+1) ? " bg-slate-500" : ""} px-3 py-2 flex justify-center items-center hover:bg-slate-300 rounded-full`}>{i + 1}</div>
           </div>
         ))}
         <button onClick={() => setCounter(counter => (counter >= Math.ceil(len / 2) ? 1 : counter + 1))} className=' px-3 py-2 flex justify-center items-center bg-slate-600 text-white rounded-md'>&gt;</button>
