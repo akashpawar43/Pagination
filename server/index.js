@@ -22,7 +22,7 @@ app.get("/", async (req, res) => {
         const [data, count] = await Promise.all([
             Todo.find({}).skip(skip).limit(limit),
             Todo.countDocuments({})
-        ])
+        ]);
 
         res.json({
             data,
